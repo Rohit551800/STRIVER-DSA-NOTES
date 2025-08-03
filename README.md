@@ -1,7 +1,7 @@
-# 📘 Striver DSA Sheet – Personal Notes in Hinglish + Hindi
+# 📘 Striver DSA Sheet – Personal Notes in Hinglish + English + Approach
 
 Welcome to my handwritten notes repository based on the **Striver DSA Sheet**!  
-These notes are made in **Hinglish + Hindi** for students who prefer a simpler, more relatable way of understanding complex DSA concepts.
+These notes are made in **Hinglish + English** for students who prefer a simpler, more relatable way of understanding complex DSA concepts.
 
 ---
 
@@ -100,5 +100,16 @@ If you find this repository helpful:
 - 🐱 GitHub: https://github.com/Rohit551800
 
 ---
+
+⚠️ Disclaimer
+Note: These notes are not yet complete.
+I'm currently learning DSA myself by following Striver’s DSA Sheet, and I’m writing these notes alongside my own progress.
+
+🛠️ New topics and updates will be added gradually as I continue learning and solving problems.
+
+If you're using this repository, I recommend starring it to stay updated with new additions.
+
+💬 Suggestions, feedback, or contributions are always welcome — feel free to open an issue if you notice something missing or want to help improve the notes.
+
 
 > *"DSA ko dar ke nahi, logic se samjho — aur Hindi mein seekhna koi problem nahi!"*
