@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Roadmap Handwritten Notes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Caveat', cursive;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .notebook {
+            max-width: 950px;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            border-radius: 10px;
+        }
+
+        .page {
+            background: 
+                linear-gradient(to right, #fff 0%, #fff 45px, transparent 45px),
+                repeating-linear-gradient(
+                    #fff 0px,
+                    #fff 31px,
+                    #e3f2fd 31px,
+                    #e3f2fd 32px
+                );
+            padding: 50px 50px 50px 80px;
+            position: relative;
+        }
+
+        .page::before {
+            content: '';
+            position: absolute;
+            left: 55px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #ff6b6b, #ee5a6f);
+        }
+
+        .main-title {
+            font-size: 52px;
+            font-weight: 700;
+            color: #1565c0;
+            text-align: center;
+            margin-bottom: 15px;
+            text-decoration: underline wavy;
+            text-decoration-color: #42a5f5;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            font-size: 32px;
+            color: #d32f2f;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .goal-box {
+            background: linear-gradient(135deg, #ffd54f 0%, #ffb300 100%);
+            border: 3px solid #f57f17;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+        .goal-text {
+            font-size: 30px;
+            color: #1a237e;
+            font-weight: 700;
+            margin: 8px 0;
+        }
+
+        .overview-box {
+            background: rgba(156, 39, 176, 0.1);
+            border: 3px dashed #9c27b0;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .overview-title {
+            font-size: 36px;
+            color: #6a1b9a;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-decoration: underline;
+        }
+
+        .overview-point {
+            font-size: 26px;
+            color: #424242;
+            margin: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .overview-point::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #9c27b0;
+            font-size: 28px;
+        }
+
+        .phase-section {
+            background: linear-gradient(to right, rgba(33, 150, 243, 0.08), rgba(3, 169, 244, 0.15));
+            border-left: 6px solid #1976d2;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 35px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .phase-header {
+            font-size: 40px;
+            color: #0d47a1;
+            font-weight: 700;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #1976d2;
+            padding-bottom: 10px;
+        }
+
+        .phase-badge {
+            background: linear-gradient(135deg, #1976d2, #0d47a1);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            font-size: 28px;
+            margin-right: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .objective-box {
+            background: rgba(76, 175, 80, 0.15);
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .section-title {
+            font-size: 32px;
+            color: #2e7d32;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .section-content {
+            font-size: 26px;
+            color: #1b5e20;
+            line-height: 1.5;
+        }
+
+        .skills-box {
+            background: rgba(255, 152, 0, 0.12);
+            border: 2px solid #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .skills-title {
+            font-size: 32px;
+            color: #e65100;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .skill-item {
+            font-size: 25px;
+            color: #bf360c;
+            margin: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .skill-item::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: #ff6f00;
+        }
+
+        .topics-box {
+            background: rgba(233, 30, 99, 0.08);
+            border: 2px solid #e91e63;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .topics-title {
+            font-size: 32px;
+            color: #c2185b;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .topic-item {
+            font-size: 25px;
+            color: #880e4f;
+            margin: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .topic-item::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #e91e63;
+            font-size: 28px;
+        }
+
+        .practice-box {
+            background: rgba(103, 58, 183, 0.1);
+            border: 2px solid #673ab7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .practice-title {
+            font-size: 32px;
+            color: #4527a0;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .practice-item {
+            font-size: 25px;
+            color: #311b92;
+            margin: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .practice-item::before {
+            content: '☞';
+            position: absolute;
+            left: 0;
+            color: #673ab7;
+            font-size: 26px;
+        }
+
+        .outcome-box {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .outcome-title {
+            font-size: 32px;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .outcome-item {
+            font-size: 26px;
+            color: white;
+            margin: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .outcome-item::before {
+            content: '✔';
+            position: absolute;
+            left: 0;
+            color: #ffeb3b;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .final-skills-box {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .final-title {
+            font-size: 40px;
+            color: white;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            text-decoration: underline;
+        }
+
+        .final-skill {
+            font-size: 28px;
+            color: white;
+            margin: 12px 0;
+            padding-left: 35px;
+            position: relative;
+        }
+
+        .final-skill::before {
+            content: '★';
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            font-size: 32px;
+        }
+
+        .motivation-box {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 15px;
+            padding: 35px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .motivation-text {
+            font-size: 34px;
+            color: white;
+            font-weight: 700;
+            line-height: 1.6;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .highlight {
+            background: linear-gradient(180deg, transparent 60%, #ffeb3b 60%);
+            padding: 2px 6px;
+            font-weight: 700;
+        }
+
+        .timeline-marker {
+            display: inline-block;
+            background: #e91e63;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 24px;
+            margin-left: 10px;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .notebook {
+                box-shadow: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page {
+                padding: 30px 30px 30px 60px;
+            }
+            .main-title {
+                font-size: 38px;
+            }
+            .phase-header {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notebook">
+        <div class="page">
+            
+            <!-- MAIN TITLE -->
+            <div class="main-title">
+                🧭 1-Year Java Developer<br>Roadmap with DSA
+            </div>
+
+            <!-- GOAL BOX -->
+            <div class="goal-box">
+                <div class="goal-text">🎯 Goal: Job-Ready Java Developer</div>
+                <div class="goal-text">⏱ Duration: 12 Months</div>
+                <div class="goal-text">📚 Daily Study: 3–5 Hours</div>
+            </div>
+
+            <!-- OVERVIEW -->
+            <div class="overview-box">
+                <div class="overview-title">📌 Roadmap Overview</div>
+                <div style="font-size: 26px; color: #424242; margin-bottom: 15px;">
+                    This roadmap is designed for beginners to intermediate learners who want to become <span class="highlight">professional Java developers</span>.
+                </div>
+                <div class="overview-point">Core Java & Advanced Java</div>
+                <div class="overview-point">Data Structures & Algorithms (DSA)</div>
+                <div class="overview-point">Backend Development with Spring Boot</div>
+                <div class="overview-point">Database & SQL</div>
+                <div class="overview-point">Projects & Interview Preparation</div>
+            </div>
+
+            <!-- PHASE 1 -->
+            <div class="phase-section">
+                <div class="phase-header">
+                    <span class="phase-badge">PHASE 1</span>
+                    Programming Foundations
+                    <span class="timeline-marker">Month 1</span>
+                </div>
+
+                <div class="objective-box">
+                    <div class="section-title">🎯 Objective</div>
+                    <div class="section-content">
+                        Build a strong programming base and logical thinking using Java
+                    </div>
+                </div>
+
+                <div class="skills-box">
+                    <div class="skills-title">🧠 Skills Required</div>
+                    <div class="skill-item">Basic problem-solving</div>
+                    <div class="skill-item">Understanding program flow</div>
+                    <div class="skill-item">Writing clean syntax</div>
+                </div>
+
+                <div class="topics-box">
+                    <div class="topics-title">📘 Topics to Learn</div>
+                    <div class="topic-item">Java installation & setup</div>
+                    <div class="topic-item">JDK, JRE, JVM</div>
+                    <div class="topic-item">Variables & Data Types</div>
+                    <div class="topic-item">Input / Output</div>
+                    <div class="topic-item">Operators</div>
+                    <div class="topic-item">Conditional statements (if-else, switch)</div>
+                    <div class="topic-item">Loops (for, while, do-while)</div>
+                    <div class="topic-item">Pattern printing</div>
+                </div>
+
+                <div class="practice-box">
+                    <div class="practice-title">🛠 Practice</div>
+                    <div class="practice-item">Calculator program</div>
+                    <div class="practice-item">Factorial & Fibonacci</div>
+                    <div class="practice-item">Prime number check</div>
+                    <div class="practice-item">Star & number patterns</div>
+                </div>
+
+                <div class="outcome-box">
+                    <div class="outcome-title">✅ Outcome</div>
+                    <div class="outcome-item">Able to write basic Java programs</div>
+                    <div class="outcome-item">Improved logical thinking</div>
+                </div>
+            </div>
+
+            <!-- PHASE 2 -->
+            <div class="phase-section">
+                <div class="phase-header">
+                    <span class="phase-badge">PHASE 2</span>
+                    Core Java & OOP
+                    <span class="timeline-marker">Month 2–3</span>
+                </div>
+
+                <div class="objective-box">
+                    <div class="section-title">🎯 Objective</div>
+                    <div class="section-content">
+                        Master Object-Oriented Programming concepts in Java
+                    </div>
+                </div>
+
+                <div class="skills-box">
+                    <div class="skills-title">🧠 Skills Required</div>
+                    <div class="skill-item">Object-oriented thinking</div>
+                    <div class="skill-item">Code reusability</div>
+                    <div class="skill-item">Modularity</div>
+                </div>
+
+                <div class="topics-box">
+                    <div class="topics-title">📘 Core Java Topics</div>
+                    <div class="topic-item">Classes & Objects</div>
+                    <div class="topic-item">Constructors</div>
+                    <div class="topic-item">this & static keyword</div>
+                    <div class="topic-item">Inheritance</div>
+                    <div class="topic-item">Polymorphism</div>
+                    <div class="topic-item">Method overloading & overriding</div>
+                    <div class="topic-item">Abstraction (abstract class & interface)</div>
+                    <div class="topic-item">Encapsulation</div>
+                </div>
+
+                <div class="topics-box">
+                    <div class="topics-title">📘 Advanced Java Topics</div>
+                    <div class="topic-item">String, StringBuilder, StringBuffer</div>
+                    <div class="topic-item">Wrapper classes</div>
+                    <div class="topic-item">Arrays (1D & 2D)</div>
+                    <div class="topic-item">Exception handling</div>
+                    <div class="topic-item">Packages</div>
+                </div>
+
+                <div class="practice-box">
+                    <div class="practice-title">🛠 Practice</div>
+                    <div class="practice-item">Bank Management System (console)</div>
+                    <div class="practice-item">Student Management System</div>
+                </div>
+
+                <div class="outcome-box">
+                    <div class="outcome-title">✅ Outcome</div>
+                    <div class="outcome-item">Strong command on Core Java</div>
+                    <div class="outcome-item">Clear OOP fundamentals</div>
+                </div>
+            </div>
+
+            <!-- PHASE 3 -->
+            <div class="phase-section">
+                <div class="phase-header">
+                    <span class="phase-badge">PHASE 3</span>
+                    DSA – Basics
+                    <span class="timeline-marker">Month 4–5</span>
+                </div>
+
+                <div class="objective-box">
+                    <div class="section-title">🎯 Objective</div>
+                    <div class="section-content">
+                        Develop a solid foundation in Data Structures & Algorithms
+                    </div>
+                </div>
+
+                <div class="skills-box">
+                    <div class="skills-title">🧠 Skills Required</div>
+                    <div class="skill-item">Analytical thinking</div>
+                    <div class="skill-item">Time complexity analysis</div>
+                </div>
+
+                <div class="topics-box">
+                    <div class="topics-title">📘 DSA Fundamentals</div>
+                    <div class="topic-item">Time Complexity (Big-O)</div>
+                    <div class="topic-item">Space Complexity</div>
+                </div>
+
+                <div class="topics-box">
+                    <div class="topics-title">📘 Data Structures</div>
+                    <div class="topic-item">Arrays</div>
+                    <div class="topic-item">Strings</div>
+                    <div class="topic-item">Recursion</div>
+                    <div class="topic-item">Hashing</div>
+                    <div class="topic-item">Linked List (Singly & Doubly)</div>
+                    <div class="topic-item">Stack</div>
+                    <div class="topic-item">Queue</div>
+                </div>
+
+                <div class="practice-box">
+                    <div class="practice-title">🛠 Practice</div>
+                    <div class="practice-item">LeetCode (Easy → Medium)</div>
+                    <div class="practice-item">GeeksforGeeks problems</div>
+                </div>
+
+                <div class="outcome-box">
+                    <div class="outcome-title">✅ Outcome</div>
+                    <div class="outcome-item">Can solve basic interview problems</div>
+                    <div class="outcome-item">Better optimization skills</div>
+                </div>
+            </div>
+
+            <!-- PHASE 4 -->
+            <div class="phase-section">
+                <div class="phase-header">
+                    <span class="phase-badge">PHASE 4</span>
+                    Advanced DSA
+                    <span class="timeline-marker">Month 6–7</span>
+                </div>
+
+                <div class="objective-box">
+                    <div class="section-title">🎯 Objective</div>
+                    <div class="section-content">
+                        Reach interview-level problem-solving ability
+                    </div>
+                </div>
+
+                <div class="skills-box">
+                    <div class="skills-title">🧠 Skills Required</div>
+                    <div class="skill-item">Pattern recognition</div>
+                    <div class="skill-item">Optimized coding</div>
+                </div>
+
+                <div class="topics-box">
+                    <div class="topics-title">📘 Topics to Learn</div>
+                    <div class="topic-item">Binary Search</div>
+                    <div class="topic-item">Sorting algorithms</div>
+                    <div class="topic-item">Trees (Binary Tree, BST)</div>
+                    <div class="topic-item">Graphs (BFS, DFS)</div>
+                    <div class="topic-item">Heap / Priority Queue</div>
+                    <div class="topic-item">Greedy algorithms</div>
+                    <div class="topic-item">Dynamic Programming (DP)</div>
+                </div>
+
+                <div class="practice-box">
+                    <div class="practice-title">🛠 Practice Strategy</div>
+                    <div class="practice-item">2–3 problems daily</div>
+                    <div class="practice-item">Write dry runs</div>
+                    <div class="practice-item">Analyze mistakes</div>
+                </div>
+
+                <div class="outcome-box">
+                    <div class="outcome-title">✅ Outcome</div>
+                    <div class="outcome-item">Ready for product-based company interviews</div>
+                </div>
+            </div>
+
+            <!-- PHASE 5 -->
+            <div class="phase-section">
+                <div class="phase-header">
+                    <span class="phase-badge">PHASE 5</span>
+                    Database & SQL
+                    <span class="timeline-marker">Month 8</span>
+                </div>
+
+                <div class="objective-box">
+                    <div class="section-title">🎯 Objective</div>
+                    <div class="section-content">
+                        Understand data storage and database management
+                    </div>
+                </div>
+
+                <div class="skills-box">
+                    <div class="skills-title">🧠 Skills Required</div>
+                    <div class="skill-item">Query writing</div>
+                    <div class="skill-item">Database design</div>
+                </div>
+
+                <div class="topics-box">
+                    <div class="topics-title">📘 SQL Topics</div>
+                    <div class="topic-item">DBMS vs RDBMS</div>
+                    <div class="topic-item">MySQL setup</div>
+                    <div class="topic-item">CRUD operations</div>
+                    <div class="topic-item">Joins</div>
+                    <div class="topic-item">Subqueries</div>
+                    <div class="topic-item">Indexing</div>
+                    <div class="topic-item">Normalization</div>
+                </div>
+
+                <div class="practice-box">
+                    <div class="practice-title">🛠 Practice</div>
+                    <div class="practice-item">Design schemas</div>
+                    <div class="practice-item">Solve SQL interview queries</div>
+                </div>
+
+                <div class="outcome-box">
+                    <div class="outcome-title">✅ Outcome</div>
+                    <div class="outcome-item">Strong SQL fundamentals</div>
+                </div>
+            </div>
+
+            <!-- PHASE 6 -->
+            <div class="phase-section">
+                <div class="phase-header">
+                    <span class="phase-badge">PHASE 6</span>
+                    Java Backend Development
+                    <span class="timeline-marker">Month 9–10</span>
+                </div>
+
+                <div class="objective-box">
+                    <div class="section-title">🎯 Objective</div>
+                    <div class="section-content">
+                        Become a backend Java developer
+                    </div>
+                </div>
+
+                <div class="skills-box">
+                    <div class="skills-title">🧠 Skills Required</div>
+                    <div class="skill-item">REST API design</div>
+                    <div class="skill-item">Backend architecture</div>
+                </div>
+
+                <div class="topics-box">
+                    <div class="topics-title">📘 Technologies</div>
+                    <div class="topic-item">JDBC</div>
+                    <div class="topic-item">Servlet & JSP (Basics)</div>
+                    <div class="topic-item">Spring Framework</div>
+                    <div class="topic-item">Spring Boot</div>
+                    <div class="topic-item">REST APIs</div>
+                    <div class="topic-item">MVC architecture</div>
+                    <div class="topic-item">Hibernate / JPA</div>
+                </div>
+
+                <div class="practice-box">
+                    <div class="practice-title">🛠 Projects</div>
+                    <div class="practice-item">Student Management System</div>
+                    <div class="practice-item">Online Quiz Application</div>
+                    <div class="practice-item">E-commerce backend APIs</div>
+                </div>
+
+                <div class="outcome-box">
+                    <div class="outcome-title">✅ Outcome</div>
+                    <div class="outcome-item">Can build real-world backend applications</div>
+                </div>
+            </div>
+
+            <!-- PHASE 7 -->
+            <div class="phase-section">
+                <div class="phase-header">
+                    <span class="phase-badge">PHASE 7</span>
+                    System Design & Projects
+                    <span class="timeline-marker">Month 11</span>
+                </div>
+
+                <div class="objective-box">
+                    <div class="section-title">🎯 Objective</div>
+                    <div class="section-content">
+                        Learn how industry-level applications are designed
+                    </div>
+                </div>
+
+                <div class="skills-box">
+                    <div class="skills-title">🧠 Skills Required</div>
+                    <div class="skill-item">Low-level design</div>
+                    <div class="skill-item">Code structuring</div>
+                </div>
+
+                <div class="topics-box">
+                    <div class="topics-title">📘 Topics</div>
+                    <div class="topic-item">MVC architecture</div>
+                    <div class="topic-item">REST design principles</div>
+                    <div class="topic-item">Authentication (JWT basics)</div>
+                    <div class="topic-item">Global exception handling</div>
+                </div>
+
+                <div class="practice-box">
+                    <div class="practice-title">🛠 Projects</div>
+                    <div class="practice-item">Full-stack Java project</div>
+                    <div class="practice-item">GitHub deployment</div>
+                </div>
+
+                <div class="outcome-box">
+                    <div class="outcome-title">✅ Outcome</div>
+                    <div class="outcome-item">Portfolio-ready projects</div>
+                </div>
+            </div>
+
+            <!-- PHASE 8 -->
+            <div class="phase-section">
+                <div class="phase-header">
+                    <span class="phase-badge">PHASE 8</span>
+                    Interview Preparation
+                    <span class="timeline-marker">Month 12</span>
+                </div>
+
+                <div class="objective-box">
+                    <div class="section-title">🎯 Objective</div>
+                    <div class="section-content">
+                        Crack Java developer interviews
+                    </div>
+                </div>
+
+                <div class="skills-box">
+                    <div class="skills-title">🧠 Skills Required</div>
+                    <div class="skill-item">Communication skills</div>
+                    <div class="skill-item">Explanation of logic</div>
+                </div>
+
+                <div class="topics-box">
+                    <div class="topics-title">📘 Preparation Areas</div>
+                    <div class="topic-item">DSA revision</div>
+                    <div class="topic-item">Core Java interview questions</div>
+                    <div class="topic-item">SQL queries</div>
+                    <div class="topic-item">Spring Boot questions</div>
+                    <div class="topic-item">HR & behavioral questions</div>
+                </div>
+
+                <div class="practice-box">
+                    <div class="practice-title">🛠 Practice</div>
+                    <div class="practice-item">Mock interviews</div>
+                    <div class="practice-item">Self-review</div>
+                </div>
+
+                <div class="outcome-box">
+                    <div class="outcome-title">✅ Outcome</div>
+                    <div class="outcome-item">Interview-ready Java developer</div>
+                </div>
+            </div>
+
+            <!-- FINAL SKILLS -->
+            <div class="final-skills-box">
+                <div class="final-title">
+                    🏁 Final Skill Set After 1 Year
+                </div>
+                <div class="final-skill">Core Java & OOP</div>
+                <div class="final-skill">Advanced DSA</div>
+                <div class="final-skill">SQL & Databases</div>
+                <div class="final-skill">Spring Boot Backend</div>
+                <div class="final-skill">Real-world Projects</div>
+                <div class="final-skill">Interview Confidence</div>
+            </div>
+
+            <!-- MOTIVATION -->
+            <div class="motivation-box">
+                <div class="motivation-text">
+                    ✨ "Consistency is the key" ✨<br><br>
+                    Daily practice + revision + projects<br>
+                    will guarantee success 🚀
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

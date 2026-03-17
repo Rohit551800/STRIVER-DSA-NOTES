@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handwritten String Notes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Caveat', cursive;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .notebook {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .page {
+            background: 
+                linear-gradient(to right, #fff 0%, #fff 40px, transparent 40px),
+                repeating-linear-gradient(
+                    #fff 0px,
+                    #fff 31px,
+                    #e8f0fe 31px,
+                    #e8f0fe 32px
+                );
+            padding: 60px 60px 60px 80px;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .page::before {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #ffc1cc;
+        }
+
+        .title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #d32f2f;
+            text-align: center;
+            margin-bottom: 10px;
+            text-decoration: underline;
+            text-decoration-color: #ff6b6b;
+            text-decoration-thickness: 3px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 28px;
+            color: #1976d2;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .pattern-section {
+            margin-bottom: 50px;
+            padding: 20px;
+            background: rgba(255, 243, 224, 0.3);
+            border-left: 4px solid #ff9800;
+            border-radius: 4px;
+        }
+
+        .pattern-title {
+            font-size: 36px;
+            color: #e91e63;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-decoration: underline wavy;
+            text-decoration-color: #f48fb1;
+        }
+
+        .pattern-number {
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .section-heading {
+            font-size: 30px;
+            color: #00796b;
+            margin: 25px 0 15px 0;
+            font-weight: 700;
+            border-bottom: 2px dashed #4db6ac;
+            padding-bottom: 5px;
+        }
+
+        .bullet-point {
+            font-size: 26px;
+            color: #424242;
+            margin: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .bullet-point::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #ff6b6b;
+            font-weight: 700;
+            font-size: 28px;
+        }
+
+        .code-box {
+            background: #f8f9fa;
+            border: 2px dashed #607d8b;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            color: #2c3e50;
+            line-height: 1.8;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .example-box {
+            background: rgba(255, 235, 59, 0.2);
+            border: 2px solid #fbc02d;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 24px;
+        }
+
+        .highlight {
+            background: linear-gradient(180deg, transparent 60%, #ffeb3b 60%);
+            padding: 2px 5px;
+            font-weight: 700;
+        }
+
+        .steps-box {
+            background: rgba(156, 204, 101, 0.2);
+            border-left: 5px solid #7cb342;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .step {
+            font-size: 26px;
+            color: #33691e;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+
+        .problems-list {
+            background: rgba(179, 229, 252, 0.3);
+            border: 2px solid #4fc3f7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .problem {
+            font-size: 24px;
+            color: #01579b;
+            margin: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .problem::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: 700;
+        }
+
+        .final-mantra {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 40px 0;
+            font-size: 32px;
+            font-weight: 700;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        .table-box {
+            background: white;
+            border: 3px solid #9c27b0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 24px;
+        }
+
+        th {
+            background: #9c27b0;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 700;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #424242;
+        }
+
+        tr:nth-child(even) {
+            background: rgba(156, 39, 176, 0.05);
+        }
+
+        .pro-tip {
+            background: rgba(255, 87, 34, 0.1);
+            border-left: 5px solid #ff5722;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-size: 26px;
+            color: #bf360c;
+        }
+
+        .underline-red {
+            text-decoration: underline;
+            text-decoration-color: #f44336;
+            text-decoration-thickness: 2px;
+        }
+
+        .underline-blue {
+            text-decoration: underline;
+            text-decoration-color: #2196f3;
+            text-decoration-thickness: 2px;
+        }
+
+        .arrow {
+            color: #ff6b6b;
+            font-size: 32px;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .notebook {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notebook">
+        <div class="page">
+            <div class="title">🔥 STRING PATTERNS 🔥</div>
+            <div class="subtitle">Hinglish Master Notes</div>
+            <div style="text-align: center; font-size: 28px; color: #d32f2f; margin-bottom: 50px;">
+                Enough to crack ANY STRING QUESTION!
+            </div>
+
+            <!-- PATTERN 1 -->
+            <div class="pattern-section">
+                <div class="pattern-title">
+                    <span class="pattern-number">1</span>
+                    HASHING / FREQUENCY PATTERN
+                </div>
+
+                <div class="section-heading">📌 Ye pattern kya hota hai?</div>
+                <div class="bullet-point"><span class="highlight">Count</span> batao</div>
+                <div class="bullet-point"><span class="highlight">Compare</span> karo</div>
+                <div class="bullet-point">Kitni baar <span class="highlight">aaya</span></div>
+                <div class="bullet-point"><span class="highlight">Anagram</span> check karo</div>
+                <div style="font-size: 26px; margin-top: 15px; color: #d32f2f; font-weight: 700;">
+                    👉 Tab frequency array / map use hota hai
+                </div>
+
+                <div class="section-heading">✅ Example Question</div>
+                <div class="example-box">
+                    <strong>Check if two strings are Anagram</strong><br>
+                    s = "listen"<br>
+                    t = "silent"
+                </div>
+
+                <div class="section-heading">🔍 Solution Idea</div>
+                <div style="font-size: 26px; margin: 15px 0; color: #424242;">
+                    Dono strings ke har character ki frequency <span class="highlight">same</span> honi chahiye
+                </div>
+
+                <div class="code-box">
+int freq[26] = {0};<br><br>
+
+// s ke characters count karo<br>
+for(char c : s)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;freq[c - 'a']++;<br><br>
+
+// t ke characters subtract karo<br>
+for(char c : t)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;freq[c - 'a']--;<br><br>
+
+// check karo<br>
+for(int i = 0; i < 26; i++)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if(freq[i] != 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;<br><br>
+
+return true;
+                </div>
+
+                <div class="steps-box">
+                    <div class="section-heading">🧠 Steps (Hashing Pattern)</div>
+                    <div class="step">1️⃣ Decide character range (a-z / A-Z / ASCII)</div>
+                    <div class="step">2️⃣ Frequency array banao</div>
+                    <div class="step">3️⃣ String traverse karo</div>
+                    <div class="step">4️⃣ Count / compare karke result nikalo</div>
+                </div>
+
+                <div class="problems-list">
+                    <div class="section-heading">📘 LeetCode Practice</div>
+                    <div class="problem">242 - Valid Anagram</div>
+                    <div class="problem">387 - First Unique Character in a String</div>
+                    <div class="problem">383 - Ransom Note</div>
+                    <div class="problem">451 - Sort Characters By Frequency</div>
+                    <div class="problem">409 - Longest Palindrome</div>
+                </div>
+            </div>
+
+            <!-- PATTERN 2 -->
+            <div class="pattern-section">
+                <div class="pattern-title">
+                    <span class="pattern-number">2</span>
+                    TWO POINTER PATTERN
+                </div>
+
+                <div class="section-heading">📌 Ye pattern kya hota hai?</div>
+                <div class="bullet-point"><span class="highlight">Start vs End</span> compare karna ho</div>
+                <div class="bullet-point"><span class="highlight">Reverse</span> karna ho</div>
+                <div class="bullet-point"><span class="highlight">Palindrome</span> check karna ho</div>
+                <div style="font-size: 26px; margin-top: 15px; color: #d32f2f; font-weight: 700;">
+                    👉 Tab do pointers lagte hain (left, right)
+                </div>
+
+                <div class="section-heading">✅ Example Question</div>
+                <div class="example-box">
+                    <strong>Check Palindrome</strong><br>
+                    s = "madam"
+                </div>
+
+                <div class="code-box">
+int l = 0, r = s.size() - 1;<br><br>
+
+while(l < r) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if(s[l] != s[r])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;l++;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;r--;<br>
+}<br><br>
+
+return true;
+                </div>
+
+                <div class="steps-box">
+                    <div class="section-heading">🧠 Steps (Two Pointer)</div>
+                    <div class="step">1️⃣ Ek pointer start pe rakho</div>
+                    <div class="step">2️⃣ Ek pointer end pe rakho</div>
+                    <div class="step">3️⃣ Compare / swap karo</div>
+                    <div class="step">4️⃣ Pointers move karte raho</div>
+                </div>
+
+                <div class="problems-list">
+                    <div class="section-heading">📘 LeetCode Practice</div>
+                    <div class="problem">125 - Valid Palindrome</div>
+                    <div class="problem">344 - Reverse String</div>
+                    <div class="problem">680 - Valid Palindrome II</div>
+                    <div class="problem">167 - Two Sum II</div>
+                    <div class="problem">541 - Reverse String II</div>
+                </div>
+            </div>
+
+            <!-- PATTERN 3 -->
+            <div class="pattern-section">
+                <div class="pattern-title">
+                    <span class="pattern-number">3</span>
+                    REVERSE / WORDS PATTERN
+                </div>
+
+                <div class="section-heading">📌 Ye pattern kya hota hai?</div>
+                <div class="bullet-point"><span class="highlight">Reverse words</span></div>
+                <div class="bullet-point"><span class="highlight">Sentence ulta</span> karo</div>
+                <div class="bullet-point">Har <span class="highlight">word reverse</span> karo</div>
+
+                <div class="section-heading">✅ Example</div>
+                <div class="example-box">
+                    <strong>Input:</strong> "My name is Rohit"<br>
+                    <strong>Output:</strong> "Rohit is name My"
+                </div>
+
+                <div class="section-heading">🔍 Logic</div>
+                <div style="font-size: 26px; margin: 15px 0; color: #424242;">
+                    1. Words <span class="highlight">split</span> karo<br>
+                    2. Order <span class="highlight">reverse</span> karo<br>
+                    3. <span class="highlight">Join</span> karke final string banao
+                </div>
+
+                <div class="steps-box">
+                    <div class="section-heading">🧠 Steps</div>
+                    <div class="step">1️⃣ Word extract karo</div>
+                    <div class="step">2️⃣ Vector / stack use karo</div>
+                    <div class="step">3️⃣ Reverse order me arrange karo</div>
+                    <div class="step">4️⃣ Final answer banao</div>
+                </div>
+
+                <div class="problems-list">
+                    <div class="section-heading">📘 LeetCode Practice</div>
+                    <div class="problem">151 - Reverse Words in a String</div>
+                    <div class="problem">557 - Reverse Words in a String III</div>
+                    <div class="problem">186 - Reverse Words in a String II</div>
+                    <div class="problem">345 - Reverse Vowels of a String</div>
+                    <div class="problem">541 - Reverse String II</div>
+                </div>
+            </div>
+
+            <!-- PATTERN 4 -->
+            <div class="pattern-section">
+                <div class="pattern-title">
+                    <span class="pattern-number">4</span>
+                    SLIDING WINDOW / SUBSTRING
+                </div>
+
+                <div class="section-heading">📌 Ye pattern kya hota hai?</div>
+                <div class="bullet-point"><span class="highlight">Longest / shortest</span> substring</div>
+                <div class="bullet-point"><span class="highlight">Without repeating</span></div>
+                <div class="bullet-point"><span class="highlight">Window maintain</span> karo</div>
+
+                <div class="section-heading">✅ Example Question</div>
+                <div class="example-box">
+                    <strong>Longest Substring Without Repeating Characters</strong>
+                </div>
+
+                <div class="code-box">
+unordered_set&lt;char&gt; st;<br>
+int l = 0, ans = 0;<br><br>
+
+for(int r = 0; r < s.size(); r++) {<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;// Duplicate mila? Shrink window<br>
+&nbsp;&nbsp;&nbsp;&nbsp;while(st.count(s[r])) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;st.erase(s[l]);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;l++;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;st.insert(s[r]);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ans = max(ans, r - l + 1);<br>
+}<br><br>
+
+return ans;
+                </div>
+
+                <div class="steps-box">
+                    <div class="section-heading">🧠 Steps</div>
+                    <div class="step">1️⃣ Window start aur end rakho</div>
+                    <div class="step">2️⃣ Duplicate aaye to window shrink karo</div>
+                    <div class="step">3️⃣ Condition valid ho to expand karo</div>
+                    <div class="step">4️⃣ Answer update karte raho</div>
+                </div>
+
+                <div class="problems-list">
+                    <div class="section-heading">📘 LeetCode Practice</div>
+                    <div class="problem">3 - Longest Substring Without Repeating</div>
+                    <div class="problem">76 - Minimum Window Substring</div>
+                    <div class="problem">567 - Permutation in String</div>
+                    <div class="problem">438 - Find All Anagrams in a String</div>
+                    <div class="problem">1004 - Max Consecutive Ones III</div>
+                </div>
+            </div>
+
+            <!-- PATTERN 5 -->
+            <div class="pattern-section">
+                <div class="pattern-title">
+                    <span class="pattern-number">5</span>
+                    SORTING STRING PATTERN
+                </div>
+
+                <div class="section-heading">📌 Ye pattern kya hota hai?</div>
+                <div class="bullet-point"><span class="highlight">Order</span> chahiye</div>
+                <div class="bullet-point"><span class="highlight">Rearrangement</span> karna ho</div>
+                <div class="bullet-point"><span class="highlight">Anagram grouping</span> ho</div>
+
+                <div class="section-heading">✅ Example</div>
+                <div class="code-box">
+sort(s.begin(), s.end());<br><br>
+// Sorted string se comparison easy ho jata hai
+                </div>
+
+                <div class="steps-box">
+                    <div class="section-heading">🧠 Steps</div>
+                    <div class="step">1️⃣ String sort karo</div>
+                    <div class="step">2️⃣ Compare ya group karo</div>
+                    <div class="step">3️⃣ Output build karo</div>
+                </div>
+
+                <div class="problems-list">
+                    <div class="section-heading">📘 LeetCode Practice</div>
+                    <div class="problem">49 - Group Anagrams</div>
+                    <div class="problem">242 - Valid Anagram</div>
+                    <div class="problem">1859 - Sorting the Sentence</div>
+                    <div class="problem">451 - Sort Characters by Frequency</div>
+                    <div class="problem">937 - Reorder Data in Log Files</div>
+                </div>
+            </div>
+
+            <!-- PATTERN 6 -->
+            <div class="pattern-section">
+                <div class="pattern-title">
+                    <span class="pattern-number">6</span>
+                    PREFIX / SUFFIX PATTERN
+                </div>
+
+                <div class="section-heading">📌 Ye pattern kya hota hai?</div>
+                <div class="bullet-point"><span class="highlight">Common prefix</span> nikalna ho</div>
+                <div class="bullet-point"><span class="highlight">startsWith / endsWith</span> check karna ho</div>
+
+                <div class="section-heading">✅ Example</div>
+                <div class="code-box">
+if(s.find(word) == 0) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// word is prefix of s<br>
+}
+                </div>
+
+                <div class="steps-box">
+                    <div class="section-heading">🧠 Steps</div>
+                    <div class="step">1️⃣ First word pakdo</div>
+                    <div class="step">2️⃣ Baaki words se compare karo</div>
+                    <div class="step">3️⃣ Jab tak match mile reduce karte raho</div>
+                </div>
+
+                <div class="problems-list">
+                    <div class="section-heading">📘 LeetCode Practice</div>
+                    <div class="problem">14 - Longest Common Prefix</div>
+                    <div class="problem">412 - Fizz Buzz</div>
+                    <div class="problem">1023 - Camelcase Matching</div>
+                    <div class="problem">720 - Longest Word in Dictionary</div>
+                    <div class="problem">1455 - Check Word as Prefix</div>
+                </div>
+            </div>
+
+            <!-- FINAL MANTRA -->
+            <div class="final-mantra">
+                🔥 FINAL EXAM MANTRA 🔥<br><br>
+                Question padho<br>
+                <div class="arrow">↓</div>
+                Pattern identify karo<br>
+                <div class="arrow">↓</div>
+                Steps follow karo<br>
+                <div class="arrow">↓</div>
+                Code likho
+            </div>
+
+            <!-- QUICK REFERENCE TABLE -->
+            <div class="table-box">
+                <div class="section-heading" style="text-align: center; border: none;">
+                    🎯 Quick Pattern Recognition Table
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Keywords</th>
+                            <th>Pattern</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>count, frequency, anagram</td>
+                            <td><strong>Hashing</strong></td>
+                        </tr>
+                        <tr>
+                            <td>palindrome, reverse ends</td>
+                            <td><strong>Two Pointer</strong></td>
+                        </tr>
+                        <tr>
+                            <td>reverse words, sentence</td>
+                            <td><strong>Word Reverse</strong></td>
+                        </tr>
+                        <tr>
+                            <td>longest/shortest substring</td>
+                            <td><strong>Sliding Window</strong></td>
+                        </tr>
+                        <tr>
+                            <td>rearrange, group, sort</td>
+                            <td><strong>Sorting</strong></td>
+                        </tr>
+                        <tr>
+                            <td>common prefix, starts with</td>
+                            <td><strong>Prefix / Suffix</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- PRO TIPS -->
+            <div class="pro-tip">
+                <div class="section-heading" style="color: #bf360c; border-color: #ff5722;">
+                    💡 Pro Tips
+                </div>
+                <div style="margin-top: 15px;">
+                    ✅ <strong>Hashing</strong> → O(n) time, O(1)/O(n) space<br>
+                    ✅ <strong>Two Pointer</strong> → O(n) time, O(1) space<br>
+                    ✅ <strong>Sliding Window</strong> → O(n) time<br>
+                    ✅ <strong>Sorting</strong> → O(n log n) time<br><br>
+                    <strong style="font-size: 28px;">Bas ye 6 patterns master karo,<br>
+                    90% STRING QUESTIONS solve ho jayenge! 🚀</strong>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

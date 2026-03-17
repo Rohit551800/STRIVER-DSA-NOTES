@@ -1,0 +1,320 @@
+=====================================================
+        STRING PATTERNS – HINGLISH MASTER NOTES
+        Enough to crack ANY STRING QUESTION
+=====================================================
+
+
+-----------------------------------------------------
+PATTERN 1: HASHING / FREQUENCY PATTERN
+-----------------------------------------------------
+
+Ye pattern kya hota hai?
+Jab question me ye words dikhe:
+
+- Count batao
+- Compare karo
+- Kitni baar aaya
+- Anagram check karo
+
+Tab frequency array ya map use hota hai.
+
+-----------------------------------------------------
+Example Question:
+Check if two strings are Anagram
+
+s = "listen"
+t = "silent"
+-----------------------------------------------------
+
+Solution Idea:
+Dono strings ke har character ki frequency same honi chahiye.
+
+Code Logic (C++):
+
+int freq[26] = {0};
+
+// s ke characters count karo
+for(char c : s)
+    freq[c - 'a']++;
+
+// t ke characters subtract karo
+for(char c : t)
+    freq[c - 'a']--;
+
+// check karo
+for(int i = 0; i < 26; i++)
+    if(freq[i] != 0)
+        return false;
+
+return true;
+
+-----------------------------------------------------
+Steps (jab bhi Hashing pattern aaye):
+-----------------------------------------------------
+1. Decide character range (a-z / A-Z / ASCII)
+2. Frequency array ya map banao
+3. String traverse karo
+4. Count / compare karke answer nikalo
+
+-----------------------------------------------------
+LeetCode Practice (Hashing):
+-----------------------------------------------------
+242  - Valid Anagram
+387  - First Unique Character in a String
+383  - Ransom Note
+451  - Sort Characters By Frequency
+409  - Longest Palindrome
+
+
+-----------------------------------------------------
+PATTERN 2: TWO POINTER PATTERN
+-----------------------------------------------------
+
+Ye pattern kya hota hai?
+Jab:
+
+- Start vs End compare karna ho
+- Reverse karna ho
+- Palindrome check karna ho
+
+Tab do pointers use hote hain (left, right).
+
+-----------------------------------------------------
+Example Question:
+Check Palindrome
+
+s = "madam"
+-----------------------------------------------------
+
+Code Logic:
+
+int l = 0, r = s.size() - 1;
+
+while(l < r) {
+    if(s[l] != s[r])
+        return false;
+    l++;
+    r--;
+}
+
+return true;
+
+-----------------------------------------------------
+Steps (Two Pointer):
+-----------------------------------------------------
+1. Ek pointer start pe rakho
+2. Ek pointer end pe rakho
+3. Compare / swap karo
+4. Pointers move karte raho
+
+-----------------------------------------------------
+LeetCode Practice (Two Pointer):
+-----------------------------------------------------
+125 - Valid Palindrome
+344 - Reverse String
+680 - Valid Palindrome II
+167 - Two Sum II
+541 - Reverse String II
+
+
+-----------------------------------------------------
+PATTERN 3: REVERSE / WORDS PATTERN
+-----------------------------------------------------
+
+Ye pattern kya hota hai?
+Jab question bole:
+
+- Reverse words
+- Sentence ulta karo
+- Har word reverse karo
+
+-----------------------------------------------------
+Example Question:
+-----------------------------------------------------
+Input:  "My name is Rohit"
+Output: "Rohit is name My"
+
+-----------------------------------------------------
+Logic:
+-----------------------------------------------------
+1. Words split karo
+2. Order reverse karo
+3. Join karke final string banao
+
+-----------------------------------------------------
+Steps:
+-----------------------------------------------------
+1. Word extract karo
+2. Vector ya stack use karo
+3. Reverse order me arrange karo
+4. Final answer banao
+
+-----------------------------------------------------
+LeetCode Practice:
+-----------------------------------------------------
+151 - Reverse Words in a String
+557 - Reverse Words in a String III
+186 - Reverse Words in a String II
+345 - Reverse Vowels of a String
+541 - Reverse String II
+
+
+-----------------------------------------------------
+PATTERN 4: SLIDING WINDOW / SUBSTRING
+-----------------------------------------------------
+
+Ye pattern kya hota hai?
+Jab question bole:
+
+- Longest / shortest substring
+- Without repeating
+- Window maintain karo
+
+-----------------------------------------------------
+Example Question:
+Longest Substring Without Repeating Characters
+-----------------------------------------------------
+
+Code Logic:
+
+unordered_set<char> st;
+int l = 0, ans = 0;
+
+for(int r = 0; r < s.size(); r++) {
+
+    while(st.count(s[r])) {
+        st.erase(s[l]);
+        l++;
+    }
+
+    st.insert(s[r]);
+    ans = max(ans, r - l + 1);
+}
+
+return ans;
+
+-----------------------------------------------------
+Steps:
+-----------------------------------------------------
+1. Window start aur end rakho
+2. Duplicate aaye to window shrink karo
+3. Condition valid ho to expand karo
+4. Answer update karte raho
+
+-----------------------------------------------------
+LeetCode Practice:
+-----------------------------------------------------
+3    - Longest Substring Without Repeating Characters
+76   - Minimum Window Substring
+567  - Permutation in String
+438  - Find All Anagrams in a String
+1004 - Max Consecutive Ones III
+
+
+-----------------------------------------------------
+PATTERN 5: SORTING STRING PATTERN
+-----------------------------------------------------
+
+Ye pattern kya hota hai?
+Jab:
+
+- Order chahiye
+- Rearrangement karna ho
+- Anagram grouping ho
+
+-----------------------------------------------------
+Example:
+-----------------------------------------------------
+sort(s.begin(), s.end());
+
+Sorted string se comparison easy ho jata hai.
+
+-----------------------------------------------------
+Steps:
+-----------------------------------------------------
+1. String sort karo
+2. Compare ya group karo
+3. Output build karo
+
+-----------------------------------------------------
+LeetCode Practice:
+-----------------------------------------------------
+49   - Group Anagrams
+242  - Valid Anagram
+1859 - Sorting the Sentence
+451  - Sort Characters by Frequency
+937  - Reorder Data in Log Files
+
+
+-----------------------------------------------------
+PATTERN 6: PREFIX / SUFFIX
+-----------------------------------------------------
+
+Ye pattern kya hota hai?
+Jab:
+
+- Common prefix nikalna ho
+- startsWith / endsWith check karna ho
+
+-----------------------------------------------------
+Example:
+-----------------------------------------------------
+if(s.find(word) == 0) {
+    // word is prefix of s
+}
+
+-----------------------------------------------------
+Steps:
+-----------------------------------------------------
+1. First word pakdo
+2. Baaki words se compare karo
+3. Jab tak match mile reduce karte raho
+
+-----------------------------------------------------
+LeetCode Practice:
+-----------------------------------------------------
+14   - Longest Common Prefix
+412  - Fizz Buzz
+1023 - Camelcase Matching
+720  - Longest Word in Dictionary
+1455 - Check Word as Prefix
+
+
+-----------------------------------------------------
+FINAL EXAM MANTRA
+-----------------------------------------------------
+
+Question padho
+↓
+Pattern identify karo
+↓
+Steps follow karo
+↓
+Code likho
+
+
+-----------------------------------------------------
+Quick Pattern Recognition Table
+-----------------------------------------------------
+
+Keywords                           Pattern
+----------------------------------------------
+count, frequency, anagram          Hashing
+palindrome, reverse ends           Two Pointer
+reverse words, sentence            Word Reverse
+longest/shortest substring         Sliding Window
+rearrange, group, sort             Sorting
+common prefix, starts with         Prefix / Suffix
+
+
+-----------------------------------------------------
+Pro Tips:
+-----------------------------------------------------
+Hashing        → O(n) time, O(1)/O(n) space
+Two Pointer    → O(n) time, O(1) space
+Sliding Window → O(n) time
+Sorting        → O(n log n) time
+
+Bas ye 6 patterns master karo,
+90% STRING QUESTIONS solve ho jayenge!
+=====================================================

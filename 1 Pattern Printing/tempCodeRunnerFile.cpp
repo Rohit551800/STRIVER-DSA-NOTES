@@ -1,0 +1,12 @@
+ // pattern7(row);
+    // pattern8(row);
+    // pattern9(row);
+    // pattern10(row);
+    // pattern11(row);
+    // pattern12(row);
+    // pattern13(row);
+    // pattern14(row);
+    // pattern15(row);
+    // pattern16(row);
+    // pattern17(row);
+    // pattern18(row);
