@@ -25,7 +25,7 @@ int optimalLongestSubstring(string &s){
     int hash[256] = {0};
     while(r < n){
         if(hash[s[r]] == 0){
-            hash[s[r]] = 1;
+            hash[s[r]] =  1;
             maxLen = max(maxLen , r-l+1);
             r++;
         }
