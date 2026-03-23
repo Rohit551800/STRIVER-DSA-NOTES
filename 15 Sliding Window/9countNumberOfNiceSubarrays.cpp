@@ -11,7 +11,6 @@ int bruteforce(vector<int>&nums , int k){
             break;
         }
     }
-    
     return count;
 }
 int main(){
