@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DSA Patterns - Interview Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:40px 20px;font-family:'Caveat',cursive;min-height:100vh}
+.container{max-width:900px;margin:0 auto}
+.page{background:linear-gradient(to bottom,transparent 0px,transparent 31px,#e8e8e8 31px,#e8e8e8 32px,transparent 32px),white;background-size:100% 32px;padding:50px 60px 50px 80px;margin-bottom:30px;box-shadow:0 10px 40px rgba(0,0,0,0.3);position:relative;border-radius:5px;line-height:32px}
+.page::before{content:'';position:absolute;left:50px;top:0;bottom:0;width:2px;background:#ffb6c1}
+.hole{position:absolute;left:20px;width:15px;height:15px;background:radial-gradient(circle,#ddd 0%,#fff 100%);border-radius:50%;box-shadow:inset 0 2px 4px rgba(0,0,0,0.2)}
+.hole:nth-child(1){top:80px}.hole:nth-child(2){top:50%}.hole:nth-child(3){bottom:80px}
+h1{color:#2563eb;font-size:38px;text-align:center;margin-bottom:18px;text-decoration:underline;font-weight:700}
+h2{color:#dc2626;font-size:30px;margin:18px 0 10px 0;text-decoration:underline;font-weight:700}
+h3{color:#059669;font-size:24px;margin:12px 0 6px 0;font-weight:600}
+.code{color:#1e40af;font-family:'Patrick Hand',cursive;font-size:18px;line-height:24px;margin:4px 0;padding-left:10px}
+.keyword{text-decoration:underline;text-decoration-color:#dc2626;font-weight:600}
+.arrow{color:#ea580c;font-weight:700}
+.box{border:2px solid #2563eb;padding:10px;margin:10px 0;border-radius:8px;background:rgba(37,99,235,0.05)}
+.note{background:#dbeafe;border-left:4px solid #2563eb;padding:6px 8px;margin:6px 0;font-size:19px}
+.important{background:#fee2e2;border:2px dashed #dc2626;padding:8px;margin:8px 0;font-size:19px;font-weight:600}
+.thinking{background:#fef3c7;border:2px solid #f59e0b;padding:10px;margin:10px 0;border-radius:8px}
+.separator{border-bottom:2px dashed #94a3b8;margin:15px 0}
+.page-number{position:absolute;bottom:20px;right:40px;color:#64748b;font-size:17px}
+.difficulty-header{font-size:20px;font-weight:700;margin:8px 0 5px 0}
+.difficulty-easy{color:#16a34a}.difficulty-medium{color:#f59e0b}.difficulty-hard{color:#dc2626}
+.question-item{display:flex;align-items:center;justify-content:space-between;margin:5px 0;padding:5px 8px;background:#f8fafc;border-radius:6px;border-left:3px solid #3b82f6}
+.question-name{font-size:17px;color:#1e40af;flex:1;font-family:'Patrick Hand',cursive}
+.click-btn{background:linear-gradient(135deg,#3b82f6,#2563eb);color:white;padding:4px 12px;border-radius:14px;text-decoration:none;font-size:14px;font-weight:600;transition:all 0.3s ease;box-shadow:0 2px 10px rgba(59,130,246,0.3)}
+.click-btn:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(59,130,246,0.5)}
+.step{display:inline-block;width:22px;height:22px;background:#3b82f6;color:white;border-radius:50%;text-align:center;line-height:22px;font-weight:700;margin-right:5px;font-size:15px}
+.tip-box{background:#dcfce7;border-left:4px solid #16a34a;padding:8px;margin:10px 0;font-size:19px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Page 1: Introduction -->
+<div class="page">
+<div class="hole"></div><div class="hole"></div><div class="hole"></div>
+<h1>🔥 DSA Interview Patterns</h1>
+<h2 style="text-align:center;color:#059669">7 Patterns = Crack Any Interview!</h2>
+<div class="important">
+<span class="arrow">🎯 Goal:</span> Sirf list nahi, <span class="keyword">sochne ka tareeka</span> sikhenge!
+</div>
+<div class="box">
+<h3>7 Must-Know Patterns:</h3>
+<div style="font-size:22px;line-height:32px">
+1️⃣ Brute Force → Optimization<br>
+2️⃣ Two Pointer<br>
+3️⃣ Sliding Window<br>
+4️⃣ Prefix Sum<br>
+5️⃣ Kadane's Algorithm<br>
+6️⃣ Hashing<br>
+7️⃣ Binary Search
+</div>
+</div>
+<div class="tip-box">
+<span class="arrow">💡 Pro Tip:</span> Pattern identify → Brute force → Optimize → Code!
+</div>
+<div class="page-number">1</div>
+</div>
+
+<!-- Pattern 1: Brute Force → Optimization -->
+<div class="page">
+<div class="hole"></div><div class="hole"></div><div class="hole"></div>
+<h1>1️⃣ Brute Force → Optimization</h1>
+<div class="box">
+<h3>📌 Core Idea:</h3>
+<div style="font-size:21px">
+Simplest solution first → then optimize using:<br>
+• HashMap (O(1) lookup)<br>
+• Prefix Sum (avoid repeated calculations)<br>
+• Sliding Window
+</div>
+</div>
+<div class="thinking">
+<h3>🧠 Thinking Steps:</h3>
+<div style="font-size:19px;line-height:28px">
+<span class="step">1</span> Brute force soch<br>
+<span class="step">2</span> Time complexity nikalo (O(n²), O(n³))<br>
+<span class="step">3</span> Repeated work identify karo<br>
+<span class="step">4</span> Optimize: hashmap/prefix sum use karo
+</div>
+</div>
+<h3>💡 Example: Subarray Sum = K</h3>
+<div class="code">Brute: O(n²) → check every subarray</div>
+<div class="code">Optimized: O(n) → prefix sum + hashmap</div>
+<div class="code">prefixSum[j] - prefixSum[i] = K</div>
+<div class="code">→ find prefixSum[i] = prefixSum[j] - K in map</div>
+<div class="page-number">2</div>
+</div>
+
+<!-- Pattern 1 Questions -->
+<div class="page">
+<div class="hole"></div><div class="hole"></div><div class="hole"></div>
+<h2>Pattern 1: Questions</h2>
+<div class="difficulty-header difficulty-easy">✅ Easy:</div>
+<div class="question-item"><div class="question-name">Two Sum</div><a href="https://leetcode.com/problems/two-sum/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Contains Duplicate</div><a href="https://leetcode.com/problems/contains-duplicate/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Missing Number</div><a href="https://leetcode.com/problems/missing-number/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="difficulty-header difficulty-medium">⚡ Medium:</div>
+<div class="question-item"><div class="question-name">Subarray Sum Equals K</div><a href="https://leetcode.com/problems/subarray-sum-equals-k/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Product of Array Except Self</div><a href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">3Sum</div><a href="https://leetcode.com/problems/3sum/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="difficulty-header difficulty-hard">🔥 Hard:</div>
+<div class="question-item"><div class="question-name">4Sum</div><a href="https://leetcode.com/problems/4sum/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Count of Range Sum</div><a href="https://leetcode.com/problems/count-of-range-sum/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Subarrays with K Different Integers</div><a href="https://leetcode.com/problems/subarrays-with-k-different-integers/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="page-number">3</div>
+</div>
+
+<!-- Pattern 2: Two Pointer -->
+<div class="page">
+<div class="hole"></div><div class="hole"></div><div class="hole"></div>
+<h1>2️⃣ Two Pointer Pattern</h1>
+<div class="box">
+<h3>📌 Core Idea:</h3>
+<div style="font-size:21px">
+2 pointers: <span class="keyword">left</span> (start) + <span class="keyword">right</span> (end)
+</div>
+</div>
+<div class="note">
+<strong>🧠 Kab use kare?</strong><br>
+✓ Sorted array<br>
+✓ Pair/triplet problems<br>
+✓ Palindrome
+</div>
+<div class="thinking">
+<h3>🧠 Thinking Steps:</h3>
+<div style="font-size:19px;line-height:28px">
+<span class="step">1</span> Array sorted hai? → two pointer use karo<br>
+<span class="step">2</span> Pair find karna hai?<br>
+<span class="step">3</span> Move logic:<br>
+&nbsp;&nbsp;&nbsp;• sum > target → right--<br>
+&nbsp;&nbsp;&nbsp;• sum < target → left++
+</div>
+</div>
+<h3>💡 Example: Two Sum (Sorted)</h3>
+<div class="code">left = 0, right = n-1</div>
+<div class="code">while(left < right):</div>
+<div class="code">&nbsp;&nbsp;sum = arr[left] + arr[right]</div>
+<div class="code">&nbsp;&nbsp;if sum == target → return</div>
+<div class="code">&nbsp;&nbsp;elif sum < target → left++</div>
+<div class="code">&nbsp;&nbsp;else → right--</div>
+<div class="page-number">4</div>
+</div>
+
+<!-- Pattern 2 Questions -->
+<div class="page">
+<div class="hole"></div><div class="hole"></div><div class="hole"></div>
+<h2>Pattern 2: Questions</h2>
+<div class="difficulty-header difficulty-easy">✅ Easy:</div>
+<div class="question-item"><div class="question-name">Valid Palindrome</div><a href="https://leetcode.com/problems/valid-palindrome/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Two Sum II - Sorted</div><a href="https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Move Zeroes</div><a href="https://leetcode.com/problems/move-zeroes/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="difficulty-header difficulty-medium">⚡ Medium:</div>
+<div class="question-item"><div class="question-name">Container With Most Water</div><a href="https://leetcode.com/problems/container-with-most-water/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">3Sum</div><a href="https://leetcode.com/problems/3sum/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Sort Colors</div><a href="https://leetcode.com/problems/sort-colors/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="difficulty-header difficulty-hard">🔥 Hard:</div>
+<div class="question-item"><div class="question-name">Trapping Rain Water</div><a href="https://leetcode.com/problems/trapping-rain-water/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Minimum Window Substring</div><a href="https://leetcode.com/problems/minimum-window-substring/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Candy</div><a href="https://leetcode.com/problems/candy/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="page-number">5</div>
+</div>
+
+<!-- Pattern 3: Sliding Window -->
+<div class="page">
+<div class="hole"></div><div class="hole"></div><div class="hole"></div>
+<h1>3️⃣ Sliding Window</h1>
+<div class="box">
+<h3>📌 Core Idea:</h3>
+<div style="font-size:21px">
+Window maintain karte hain:<br>
+• <span class="keyword">Fixed size</span> (size = k)<br>
+• <span class="keyword">Variable size</span> (condition based)
+</div>
+</div>
+<div class="thinking">
+<h3>🧠 Thinking Steps:</h3>
+<div style="font-size:19px;line-height:28px">
+<strong>Case 1: Fixed Window (size = k)</strong><br>
+<span class="step">1</span> First window calculate<br>
+<span class="step">2</span> Slide: add next, remove previous<br><br>
+<strong>Case 2: Variable Window</strong><br>
+<span class="step">1</span> right expand<br>
+<span class="step">2</span> condition break → left move<br>
+<span class="step">3</span> update answer
+</div>
+</div>
+<h3>💡 Example: Longest Substring</h3>
+<div class="code">right expand → add to window</div>
+<div class="code">duplicate found → left++ until unique</div>
+<div class="code">update maxLength</div>
+<div class="page-number">6</div>
+</div>
+
+<!-- Pattern 3 Questions -->
+<div class="page">
+<div class="hole"></div><div class="hole"></div><div class="hole"></div>
+<h2>Pattern 3: Questions</h2>
+<div class="difficulty-header difficulty-easy">✅ Easy:</div>
+<div class="question-item"><div class="question-name">Maximum Average Subarray I</div><a href="https://leetcode.com/problems/maximum-average-subarray-i/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Contains Duplicate II</div><a href="https://leetcode.com/problems/contains-duplicate-ii/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Minimum Size Subarray Sum</div><a href="https://leetcode.com/problems/minimum-size-subarray-sum/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="difficulty-header difficulty-medium">⚡ Medium:</div>
+<div class="question-item"><div class="question-name">Longest Substring Without Repeating</div><a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Longest Repeating Character Replacement</div><a href="https://leetcode.com/problems/longest-repeating-character-replacement/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Binary Subarrays With Sum</div><a href="https://leetcode.com/problems/binary-subarrays-with-sum/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="difficulty-header difficulty-hard">🔥 Hard:</div>
+<div class="question-item"><div class="question-name">Minimum Window Substring</div><a href="https://leetcode.com/problems/minimum-window-substring/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Subarrays with K Different Integers</div><a href="https://leetcode.com/problems/subarrays-with-k-different-integers/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Sliding Window Maximum</div><a href="https://leetcode.com/problems/sliding-window-maximum/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="page-number">7</div>
+</div>
+
+<!-- Pattern 4: Prefix Sum -->
+<div class="page">
+<div class="hole"></div><div class="hole"></div><div class="hole"></div>
+<h1>4️⃣ Prefix Sum</h1>
+<div class="box">
+<h3>📌 Core Idea:</h3>
+<div style="font-size:21px">
+Repeated sum calculation avoid karna
+</div>
+</div>
+<div class="thinking">
+<h3>🧠 Thinking Steps:</h3>
+<div style="font-size:19px;line-height:28px">
+<span class="step">1</span> Prefix array banao:<br>
+&nbsp;&nbsp;&nbsp;prefix[i] = sum(0 → i)<br>
+<span class="step">2</span> Range sum:<br>
+&nbsp;&nbsp;&nbsp;sum(l → r) = prefix[r] - prefix[l-1]
+</div>
+</div>
+<h3>💡 Example: Subarray Sum = K</h3>
+<div class="code">prefix[j] - prefix[i] = k</div>
+<div class="code">→ prefix[i] = prefix[j] - k</div>
+<div class="code">→ use hashmap for O(1) lookup</div>
+<div class="separator"></div>
+<div class="difficulty-header difficulty-easy">✅ Easy:</div>
+<div class="question-item"><div class="question-name">Running Sum of 1D Array</div><a href="https://leetcode.com/problems/running-sum-of-1d-array/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Find Pivot Index</div><a href="https://leetcode.com/problems/find-pivot-index/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Range Sum Query - Immutable</div><a href="https://leetcode.com/problems/range-sum-query-immutable/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="page-number">8</div>
+</div>
+
+<!-- Pattern 4 Questions Continued -->
+<div class="page">
+<div class="hole"></div><div class="hole"></div><div class="hole"></div>
+<h2>Pattern 4: Questions (continued)</h2>
+<div class="difficulty-header difficulty-medium">⚡ Medium:</div>
+<div class="question-item"><div class="question-name">Subarray Sum Equals K</div><a href="https://leetcode.com/problems/subarray-sum-equals-k/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Continuous Subarray Sum</div><a href="https://leetcode.com/problems/continuous-subarray-sum/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Maximum Size Subarray Sum Equals K</div><a href="https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="difficulty-header difficulty-hard">🔥 Hard:</div>
+<div class="question-item"><div class="question-name">Count of Range Sum</div><a href="https://leetcode.com/problems/count-of-range-sum/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Range Sum Query 2D - Immutable</div><a href="https://leetcode.com/problems/range-sum-query-2d-immutable/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Maximum Sum of 3 Non-Overlapping Subarrays</div><a href="https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="page-number">9</div>
+</div>
+
+<!-- Pattern 5: Kadane's Algorithm -->
+<div class="page">
+<div class="hole"></div><div class="hole"></div><div class="hole"></div>
+<h1>5️⃣ Kadane's Algorithm</h1>
+<div class="box">
+<h3>📌 Core Idea:</h3>
+<div style="font-size:21px">
+Maximum subarray sum find karna
+</div>
+</div>
+<div class="thinking">
+<h3>🧠 Thinking Steps:</h3>
+<div style="font-size:19px;line-height:28px">
+<span class="step">1</span> Current sum maintain karo<br>
+<span class="step">2</span> Agar current < 0 → reset to 0<br>
+<span class="step">3</span> Max update karo
+</div>
+</div>
+<h3>💡 Logic:</h3>
+<div class="code">current = max(num, current + num)</div>
+<div class="code">maxSum = max(maxSum, current)</div>
+<div class="separator"></div>
+<div class="difficulty-header difficulty-easy">✅ Easy:</div>
+<div class="question-item"><div class="question-name">Maximum Subarray</div><a href="https://leetcode.com/problems/maximum-subarray/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="difficulty-header difficulty-medium">⚡ Medium:</div>
+<div class="question-item"><div class="question-name">Maximum Product Subarray</div><a href="https://leetcode.com/problems/maximum-product-subarray/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Maximum Sum Circular Subarray</div><a href="https://leetcode.com/problems/maximum-sum-circular-subarray/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Best Time to Buy and Sell Stock</div><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="page-number">10</div>
+</div>
+
+<!-- Pattern 5 Hard Questions -->
+<div class="page">
+<div class="hole"></div><div class="hole"></div><div class="hole"></div>
+<h2>Pattern 5: Hard Questions</h2>
+<div class="difficulty-header difficulty-hard">🔥 Hard:</div>
+<div class="question-item"><div class="question-name">Max Rectangle No Larger Than K</div><a href="https://leetcode.com/problems/maximum-sum-of-rectangle-no-larger-than-k/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Split Array Largest Sum</div><a href="https://leetcode.com/problems/split-array-largest-sum/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Maximum Subarray Sum With One Deletion</div><a href="https://leetcode.com/problems/maximum-subarray-sum-with-one-deletion/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="separator"></div>
+<h1>6️⃣ Hashing Pattern</h1>
+<div class="box">
+<h3>📌 Core Idea:</h3>
+<div style="font-size:21px">
+Fast lookup - O(1) time complexity
+</div>
+</div>
+<div class="note">
+<strong>🧠 Kab use kare?</strong><br>
+✓ Frequency track karni hai<br>
+✓ Fast search chahiye<br>
+✓ Map/Set use karo
+</div>
+<h3>💡 Example: Two Sum</h3>
+<div class="code">map[value] = index</div>
+<div class="code">if target - num in map → found!</div>
+<div class="page-number">11</div>
+</div>
+
+<!-- Pattern 6 Questions -->
+<div class="page">
+<div class="hole"></div><div class="hole"></div><div class="hole"></div>
+<h2>Pattern 6: Questions</h2>
+<div class="difficulty-header difficulty-easy">✅ Easy:</div>
+<div class="question-item"><div class="question-name">Two Sum</div><a href="https://leetcode.com/problems/two-sum/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Contains Duplicate</div><a href="https://leetcode.com/problems/contains-duplicate/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Intersection of Two Arrays</div><a href="https://leetcode.com/problems/intersection-of-two-arrays/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="difficulty-header difficulty-medium">⚡ Medium:</div>
+<div class="question-item"><div class="question-name">Longest Consecutive Sequence</div><a href="https://leetcode.com/problems/longest-consecutive-sequence/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Top K Frequent Elements</div><a href="https://leetcode.com/problems/top-k-frequent-elements/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Subarray Sum Equals K</div><a href="https://leetcode.com/problems/subarray-sum-equals-k/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="difficulty-header difficulty-hard">🔥 Hard:</div>
+<div class="question-item"><div class="question-name">Minimum Window Substring</div><a href="https://leetcode.com/problems/minimum-window-substring/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">All O'one Data Structure</div><a href="https://leetcode.com/problems/all-oone-data-structure/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Longest Substring K Distinct</div><a href="https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="page-number">12</div>
+</div>
+
+<!-- Pattern 7: Binary Search -->
+<div class="page">
+<div class="hole"></div><div class="hole"></div><div class="hole"></div>
+<h1>7️⃣ Binary Search</h1>
+<div class="box">
+<h3>📌 Core Idea:</h3>
+<div style="font-size:21px">
+Search space ko <span class="keyword">half</span> karna
+</div>
+</div>
+<div class="thinking">
+<h3>🧠 Thinking Steps:</h3>
+<div style="font-size:19px;line-height:28px">
+<span class="step">1</span> Array sorted hai?<br>
+<span class="step">2</span> Answer space define karo<br>
+<span class="step">3</span> mid calculate<br>
+<span class="step">4</span> Condition check:<br>
+&nbsp;&nbsp;&nbsp;• left ya right move karo
+</div>
+</div>
+<h3>💡 Template:</h3>
+<div class="code">left = 0, right = n-1</div>
+<div class="code">while(left <= right):</div>
+<div class="code">&nbsp;&nbsp;mid = left + (right - left) // 2</div>
+<div class="code">&nbsp;&nbsp;if arr[mid] == target → return mid</div>
+<div class="code">&nbsp;&nbsp;elif arr[mid] < target → left = mid + 1</div>
+<div class="code">&nbsp;&nbsp;else → right = mid - 1</div>
+<div class="page-number">13</div>
+</div>
+
+<!-- Pattern 7 Questions -->
+<div class="page">
+<div class="hole"></div><div class="hole"></div><div class="hole"></div>
+<h2>Pattern 7: Questions</h2>
+<div class="difficulty-header difficulty-easy">✅ Easy:</div>
+<div class="question-item"><div class="question-name">Binary Search</div><a href="https://leetcode.com/problems/binary-search/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Search Insert Position</div><a href="https://leetcode.com/problems/search-insert-position/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Sqrt(x)</div><a href="https://leetcode.com/problems/sqrtx/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="difficulty-header difficulty-medium">⚡ Medium:</div>
+<div class="question-item"><div class="question-name">Search in Rotated Sorted Array</div><a href="https://leetcode.com/problems/search-in-rotated-sorted-array/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Find Peak Element</div><a href="https://leetcode.com/problems/find-peak-element/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Koko Eating Bananas</div><a href="https://leetcode.com/problems/koko-eating-bananas/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="difficulty-header difficulty-hard">🔥 Hard:</div>
+<div class="question-item"><div class="question-name">Median of Two Sorted Arrays</div><a href="https://leetcode.com/problems/median-of-two-sorted-arrays/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Split Array Largest Sum</div><a href="https://leetcode.com/problems/split-array-largest-sum/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="question-item"><div class="question-name">Find Min in Rotated Sorted Array II</div><a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/" target="_blank" class="click-btn">Click Me</a></div>
+<div class="page-number">14</div>
+</div>
+
+<!-- Final Strategy Page -->
+<div class="page">
+<div class="hole"></div><div class="hole"></div><div class="hole"></div>
+<h1>🎯 FINAL INTERVIEW STRATEGY</h1>
+<div class="important">
+<span class="arrow">🧠</span> <strong>Jab bhi question aaye:</strong>
+</div>
+<div class="box">
+<div style="font-size:20px;line-height:30px">
+<span class="step">1</span> <span class="keyword">Pattern identify</span> karo<br>
+&nbsp;&nbsp;&nbsp;• Subarray → sliding window / prefix<br>
+&nbsp;&nbsp;&nbsp;• Pair → two pointer / hashmap<br>
+&nbsp;&nbsp;&nbsp;• Max/min → Kadane / greedy<br><br>
+<span class="step">2</span> <span class="keyword">Brute force</span> soch<br><br>
+<span class="step">3</span> <span class="keyword">Optimization</span> dhoond<br><br>
+<span class="step">4</span> <span class="keyword">Dry run</span> karo<br><br>
+<span class="step">5</span> <span class="keyword">Edge cases</span> check karo
+</div>
+</div>
+<div class="tip-box">
+<span class="arrow">🚀 Placement Hack:</span><br>
+Agar tu ye 7 patterns master kar gaya:<br>
+→ Tera DSA <span class="keyword">STRONG</span> ho jayega<br>
+→ Interviews <span class="keyword">CRACK</span> 🔥
+</div>
+<div class="important" style="text-align:center;font-size:24px;margin-top:20px">
+Practice → Pattern Recognition → Success! 💪
+</div>
+<div class="page-number">15</div>
+</div>
+
+</div>
+<script>
+document.querySelectorAll('.click-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        console.log('Opening: ' + this.previousElementSibling.textContent);
+    });
+});
+</script>
+</body>
+</html>
